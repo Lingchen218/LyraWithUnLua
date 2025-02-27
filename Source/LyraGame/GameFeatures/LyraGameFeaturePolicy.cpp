@@ -49,7 +49,7 @@ void ULyraGameFeaturePolicy::ShutdownGameFeatureManager()
 	Observers.Empty();
 }
 
-TArray<FPrimaryAssetId> ULyraGameFeaturePolicy::GetPreloadAssetListForGameFeature(const UGameFeatureData* GameFeatureToLoad) const
+TArray<FPrimaryAssetId> ULyraGameFeaturePolicy::GetPreloadAssetListForGameFeature(const UGameFeatureData* GameFeatureToLoad, bool bIncludeLoadedAssets) const
 {
 	return Super::GetPreloadAssetListForGameFeature(GameFeatureToLoad);
 }
@@ -76,7 +76,7 @@ bool ULyraGameFeaturePolicy::IsPluginAllowed(const FString& PluginURL) const
 
 #include "Hotfix/LyraHotfixManager.h"
 
-void ULyraGameFeature_HotfixManager::OnGameFeatureLoading(const UGameFeatureData* GameFeatureData)
+void ULyraGameFeature_HotfixManager::OnGameFeatureLoading(const UGameFeatureData* GameFeatureData, const FString& PluginURL)
 {
 	if (ULyraHotfixManager* HotfixManager = Cast<ULyraHotfixManager>(UOnlineHotfixManager::Get(nullptr)))
 	{
@@ -91,7 +91,7 @@ void ULyraGameFeature_HotfixManager::OnGameFeatureLoading(const UGameFeatureData
 #include "GameplayCueManager.h"
 #include "AbilitySystemGlobals.h"
 
-void ULyraGameFeature_AddGameplayCuePaths::OnGameFeatureRegistering(const UGameFeatureData* GameFeatureData, const FString& PluginName)
+void ULyraGameFeature_AddGameplayCuePaths::OnGameFeatureRegistering(const UGameFeatureData* GameFeatureData, const FString& PluginName, const FString& PluginURL)
 {
 	TRACE_CPUPROFILER_EVENT_SCOPE(ULyraGameFeature_AddGameplayCuePaths::OnGameFeatureRegistering);
 	
@@ -130,7 +130,7 @@ void ULyraGameFeature_AddGameplayCuePaths::OnGameFeatureRegistering(const UGameF
 	}
 }
 
-void ULyraGameFeature_AddGameplayCuePaths::OnGameFeatureUnregistering(const UGameFeatureData* GameFeatureData, const FString& PluginName)
+void ULyraGameFeature_AddGameplayCuePaths::OnGameFeatureUnregistering(const UGameFeatureData* GameFeatureData, const FString& PluginName, const FString& PluginURL)
 {
 	const FString PluginRootPath = TEXT("/") + PluginName;
 	for (const UGameFeatureAction* Action : GameFeatureData->GetActions())
