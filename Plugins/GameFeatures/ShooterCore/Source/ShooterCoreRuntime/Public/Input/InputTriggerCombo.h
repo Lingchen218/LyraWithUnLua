@@ -1,11 +1,11 @@
 // Copyright Epic Games, Inc. All Rights Reserved.
+#pragma once
 
 #include "CoreMinimal.h"
 #include "InputTriggers.h"
 #include "InputActionValue.h"
 
 #include "InputTriggerCombo.generated.h"
-
 class UEnhancedPlayerInput;
 class UInputAction;
 
