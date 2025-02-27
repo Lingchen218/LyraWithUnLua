@@ -484,8 +484,11 @@ bool ULyraGameplayAbility::CanChangeActivationGroup(ELyraAbilityActivationGroup 
 
 bool ULyraGameplayAbility::ChangeActivationGroup(ELyraAbilityActivationGroup NewGroup)
 {
-	ENSURE_ABILITY_IS_INSTANTIATED_OR_RETURN(ChangeActivationGroup, false);
-
+	//ENSURE_ABILITY_IS_INSTANTIATED_OR_RETURN(ChangeActivationGroup, false);
+	if (!ensure(IsInstantiated())) {
+		UE_LOG(LogTemp, Error, TEXT(" ensure(IsInstantiated()) "));
+		return false;
+	}
 	if (!CanChangeActivationGroup(NewGroup))
 	{
 		return false;
@@ -507,8 +510,11 @@ bool ULyraGameplayAbility::ChangeActivationGroup(ELyraAbilityActivationGroup New
 
 void ULyraGameplayAbility::SetCameraMode(TSubclassOf<ULyraCameraMode> CameraMode)
 {
-	ENSURE_ABILITY_IS_INSTANTIATED_OR_RETURN(SetCameraMode, );
-
+	//ENSURE_ABILITY_IS_INSTANTIATED_OR_RETURN(SetCameraMode, );
+	if (!ensure(IsInstantiated())) {
+		UE_LOG(LogTemp, Error, TEXT(" ensure(IsInstantiated()) "));
+		return ;
+	}
 	if (ULyraHeroComponent* HeroComponent = GetHeroComponentFromActorInfo())
 	{
 		HeroComponent->SetAbilityCameraMode(CameraMode, CurrentSpecHandle);
@@ -518,8 +524,11 @@ void ULyraGameplayAbility::SetCameraMode(TSubclassOf<ULyraCameraMode> CameraMode
 
 void ULyraGameplayAbility::ClearCameraMode()
 {
-	ENSURE_ABILITY_IS_INSTANTIATED_OR_RETURN(ClearCameraMode, );
-
+	//ENSURE_ABILITY_IS_INSTANTIATED_OR_RETURN(ClearCameraMode, );
+	if (!ensure(IsInstantiated())) {
+		UE_LOG(LogTemp, Error, TEXT(" ensure(IsInstantiated()) "));
+		return;
+	}
 	if (ActiveCameraMode)
 	{
 		if (ULyraHeroComponent* HeroComponent = GetHeroComponentFromActorInfo())
