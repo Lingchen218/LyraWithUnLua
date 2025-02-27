@@ -151,7 +151,7 @@ static void RegisterGameEditorMenus()
 		FOnGetContent::CreateStatic(&AddLocalPlayer),
 		LOCTEXT("GameOptions_Label", "Game Options"),
 		LOCTEXT("GameOptions_ToolTip", "Game Options"),
-		FSlateIcon(FEditorStyle::GetStyleSetName(), "LevelEditor.OpenLevelBlueprint")
+		FSlateIcon(FAppStyle::GetAppStyleSetName(), "LevelEditor.OpenLevelBlueprint")
 	);
 	BlueprintEntry.StyleNameOverride = "CalloutToolbar";
 	Section.AddEntry(BlueprintEntry);
